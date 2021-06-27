@@ -1,17 +1,23 @@
 import Layout from '@/components/Layout'
+import {useRouter} from 'next/router'
 import EventItem from '@/components/EventItem'
 import { API_URL } from '@/config/index'
 import qs from 'qs'
+import { FaItalic } from 'react-icons/fa'
+import Link from 'next/link'
 
 export default function SearchPage({ events }) {
+    const router = useRouter()
   return (
-    <Layout>
-      <h1>Events</h1>
-      {events.length === 0 && <h3>No events to show</h3>}
+    <Layout title='Search Results'>
+      <h1>Search Results for: <span style={{fontStyle:'italic'}}> {router.query.term}</span> </h1>
+      <Link href='/'>Go Back</Link>
+      {events.length === 0 && <h3>No events matched your search term</h3>}
 
       {events.map((evt) => (
         <EventItem key={evt.id} evt={evt} />
       ))}
+      
     </Layout>
   )
 }
