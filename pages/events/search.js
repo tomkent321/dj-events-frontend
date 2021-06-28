@@ -1,5 +1,5 @@
 import Layout from '@/components/Layout'
-import {useRouter} from 'next/router'
+import { useRouter } from 'next/router'
 import EventItem from '@/components/EventItem'
 import { API_URL } from '@/config/index'
 import qs from 'qs'
@@ -7,17 +7,19 @@ import { FaItalic } from 'react-icons/fa'
 import Link from 'next/link'
 
 export default function SearchPage({ events }) {
-    const router = useRouter()
+  const router = useRouter()
   return (
     <Layout title='Search Results'>
-      <h1>Search Results for: <span style={{fontStyle:'italic'}}> {router.query.term}</span> </h1>
+      <h1>
+        Search Results for:{' '}
+        <span style={{ fontStyle: 'italic' }}> {router.query.term}</span>{' '}
+      </h1>
       <Link href='/'>Go Back</Link>
       {events.length === 0 && <h3>No events matched your search term</h3>}
 
       {events.map((evt) => (
         <EventItem key={evt.id} evt={evt} />
       ))}
-      
     </Layout>
   )
 }
@@ -29,12 +31,11 @@ export async function getServerSideProps({ query: { term } }) {
         { name_contains: term },
         { venue_contains: term },
         { performers_contains: term },
-        { description_contains: term }
-      ]
-    }
+        { description_contains: term },
+      ],
+    },
   })
 
-//   {query.length > 0 ? console.log('inside Search Page query: ', query) : console.log('no query generated')}
   const res = await fetch(`${API_URL}/events?${query}`)
   const events = await res.json()
 
