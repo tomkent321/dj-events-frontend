@@ -1,5 +1,5 @@
 import Layout from '@/components/Layout'
-import EventItem from '@/components/EventItem'
+import EventItem from '@/components/Eventitem'
 import { API_URL } from '@/config/index'
 
 export default function EventsPage({ events }) {

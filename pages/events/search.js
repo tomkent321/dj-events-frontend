@@ -1,6 +1,6 @@
 import Layout from '@/components/Layout'
 import { useRouter } from 'next/router'
-import EventItem from '@/components/EventItem'
+import EventItem from '@/components/Eventitem'
 import { API_URL } from '@/config/index'
 import qs from 'qs'
 import { FaItalic } from 'react-icons/fa'
