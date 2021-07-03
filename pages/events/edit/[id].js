@@ -1,4 +1,5 @@
 import Layout from '@/components/Layout'
+import Modal from '@/components/Modal'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
@@ -8,7 +9,8 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import dayjs from 'dayjs'
 import Image from 'next/image'
-import {FaImage} from 'react-icons/fa'
+import { FaImage } from 'react-icons/fa'
+import ImageUpload from '@/components/ImageUpload'
 
 export default function EditEventPage({ evt }) {
   const formattedDate = evt.date.slice(0, 10)
@@ -28,6 +30,19 @@ export default function EditEventPage({ evt }) {
       ? evt.image[0].formats.thumbnail.url
       : '/images/event-default.png'
   )
+
+  const [imgFile, setImgFile] = useState(
+    {imgFile: ''}
+  )
+
+  const imageUploaded = (e) => {
+    const res 
+  }
+
+  const [showModal, setShowModal] = useState(false)
+  const modalClickHandler = (e) => {
+      console.log('modal click')
+  }
 
   const router = useRouter()
 
@@ -148,11 +163,15 @@ export default function EditEventPage({ evt }) {
       </form>
       <h2>Event Image</h2>
       <Image src={imagePreview} height={100} width={170}></Image>
-<div>
-    <button className='btn-secondary'>
-        <FaImage /> Update Image
-    </button>
-</div>
+      <div>
+        <button onClick={() => setShowModal(true)} className='btn-secondary btn-icon'>
+          <FaImage /> Update Image
+        </button>
+      </div>
+
+      <Modal show={showModal} onClose={() => setShowModal(false)}>
+        <ImageUpload evtId={evt.id} imageUploaded={imageUploaded}/>
+      </Modal>
     </Layout>
   )
 }
