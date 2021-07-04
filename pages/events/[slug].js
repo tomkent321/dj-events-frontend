@@ -56,20 +56,19 @@ export default function EventPage({ evt }) {
             />
           </div>
         )} */}
-<div className={styles.image}>
-        <Image
-          src={
-            evt.image.length > 0
-              ? evt.image[0].formats.thumbnail.url
-              : '/images/event-default.png'
-          }
-          width={960}
-          height={600}
-        />
-      </div>
+        <div className={styles.image}>
+          <Image
+            src={
+              evt.image.length > 0
+                ? evt.image[0].formats.medium.url
+                : '/images/event-default.png'
+            }
+            width={960}
+            height={600}
+          />
+        </div>
 
-
-{/* 960 600 */}
+        {/* 960 600 */}
         <h3>Performers:</h3>
         <p>{evt.performers}</p>
         <h3>Description:</h3>

@@ -31,18 +31,7 @@ export default function EditEventPage({ evt }) {
       : '/images/event-default.png'
   )
 
-  const [imgFile, setImgFile] = useState(
-    {imgFile: ''}
-  )
-
-  const imageUploaded = (e) => {
-    const res 
-  }
-
   const [showModal, setShowModal] = useState(false)
-  const modalClickHandler = (e) => {
-      console.log('modal click')
-  }
 
   const router = useRouter()
 
@@ -66,9 +55,10 @@ export default function EditEventPage({ evt }) {
       body: JSON.stringify(values),
     })
 
-    console.log(values)
+    // console.log(values)
     if (!res.ok) {
       toast.error('Something went wrong')
+     
     } else {
       const evt = await res.json()
       router.push(`/events/${evt.slug}`)
@@ -78,6 +68,14 @@ export default function EditEventPage({ evt }) {
   const handleInputChange = (e) => {
     const { name, value } = e.target
     setValues({ ...values, [name]: value })
+  }
+
+  const imageUploaded = async (e) => {
+    const res = await fetch(`${API_URL}/events/${evt.id}`)
+    const data = await res.json()
+    setImagePreview(data.image[0].formats.thumbnail.url)
+    // setImagePreview(data.image.formats.thumbnail.url)
+    setShowModal(false)
   }
 
   return (
@@ -164,13 +162,18 @@ export default function EditEventPage({ evt }) {
       <h2>Event Image</h2>
       <Image src={imagePreview} height={100} width={170}></Image>
       <div>
-        <button onClick={() => setShowModal(true)} className='btn-secondary btn-icon'>
+        <button
+          onClick={() => setShowModal(true)}
+          className='btn-secondary btn-icon'
+        >
           <FaImage /> Update Image
         </button>
       </div>
 
       <Modal show={showModal} onClose={() => setShowModal(false)}>
-        <ImageUpload evtId={evt.id} imageUploaded={imageUploaded}/>
+        <ImageUpload evtId={evt.id} 
+        imageUploaded={imageUploaded} />
+        
       </Modal>
     </Layout>
   )
