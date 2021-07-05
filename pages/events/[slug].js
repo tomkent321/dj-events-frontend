@@ -60,7 +60,8 @@ export default function EventPage({ evt }) {
           <Image
             src={
               evt.image.length > 0
-                ? evt.image[0].formats.medium.url
+                ? //small needs to be changed to medium when cloudinary is figured out
+                  evt.image[0].formats.small.url
                 : '/images/event-default.png'
             }
             width={960}
