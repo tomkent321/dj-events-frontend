@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "cookie": "^0.4.1",
     "dayjs": "^1.10.5",
     "next": "11.0.1",
     "qs": "^6.10.1",

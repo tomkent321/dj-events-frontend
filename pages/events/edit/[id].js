@@ -58,7 +58,6 @@ export default function EditEventPage({ evt }) {
     // console.log(values)
     if (!res.ok) {
       toast.error('Something went wrong')
-     
     } else {
       const evt = await res.json()
       router.push(`/events/${evt.slug}`)
@@ -171,17 +170,20 @@ export default function EditEventPage({ evt }) {
       </div>
 
       <Modal show={showModal} onClose={() => setShowModal(false)}>
-        <ImageUpload evtId={evt.id} 
-        imageUploaded={imageUploaded} />
-        
+        <ImageUpload evtId={evt.id} imageUploaded={imageUploaded} />
       </Modal>
     </Layout>
   )
 }
 
-export async function getServerSideProps({ params: { id } }) {
+export async function getServerSideProps({ params: { id }, req }) {
   const res = await fetch(`${API_URL}/events/${id}`)
   const evt = await res.json()
+
+  console.log(
+    'inside the edit/events/[id] getServerSideProps:',
+    req.headers.cookie
+  )
 
   return {
     props: { evt },

@@ -3,8 +3,9 @@
         "baseUrl": ".",
         "paths": {
             "@/components/*": ["components/*"],
-            "@/styles/*": ["styles/*"],
             "@/config/*": ["config/*"],
+            "@/context/*": ["context/*"],
+            "@/styles/*": ["styles/*"],
         }
     }
 }
