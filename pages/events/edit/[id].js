@@ -1,6 +1,6 @@
 import Layout from '@/components/Layout'
 import Modal from '@/components/Modal'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { API_URL } from '@/config/index'
@@ -11,6 +11,7 @@ import dayjs from 'dayjs'
 import Image from 'next/image'
 import { FaImage } from 'react-icons/fa'
 import ImageUpload from '@/components/ImageUpload'
+import AuthContext from '@/context/AuthContext'
 
 export default function EditEventPage({ evt }) {
   const formattedDate = evt.date.slice(0, 10)
@@ -25,6 +26,7 @@ export default function EditEventPage({ evt }) {
     description: evt.description,
   })
 
+  const { user } = useContext(AuthContext)
   const [imagePreview, setImagePreview] = useState(
     evt.image.length > 0
       ? evt.image[0].formats.thumbnail.url
